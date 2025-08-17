@@ -1,12 +1,33 @@
+"use client";
 import { MainHeaderData } from "@/types";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import CategoryMenu from "./CategoryMenu";
 import Search from "./Search";
+import SearchModal from "./SearchModal";
 
+const popularSearches = [
+  "on court styles",
+  "road racing",
+  "air jordan 1",
+  "air force 1",
+  "shoes",
+  "sneakers men",
+  "jordan",
+  "running shoes",
+];
 const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
+  const [isOpen, setIsOpen] = useState<boolean>();
   return (
     <div className="w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
+      {isOpen && (
+        <SearchModal
+          popularSearches={popularSearches}
+          LogoImg={mainLogo.img}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      )}
       <Link href={mainLogo.redirectTo}>{mainLogo.img}</Link>
       <div>
         <CategoryMenu navItems={navItems} />
@@ -15,7 +36,18 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
         {icons.map((icon, idx) => {
           return (
             <li key={`navItem-${icon.altText}-${idx}`}>
-              {idx === 0 ? <Search {...icon} /> : <span>{icon.img}</span>}
+              {idx === 0 ? (
+                <div
+                  onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+                    setIsOpen(true);
+                  }}
+                  className="xl:w-[168px] xl:h-9"
+                >
+                  {<Search />}
+                </div>
+              ) : (
+                <span>{icon.img}</span>
+              )}
             </li>
           );
         })}

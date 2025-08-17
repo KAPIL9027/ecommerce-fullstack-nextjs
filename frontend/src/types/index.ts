@@ -57,8 +57,7 @@ export type HeaderPropsType = {
 
 export type SearchModalProps = {
   isOpen: boolean;
-  search: string;
-  setSearch: any;
-  logoImg: ReactNode;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  LogoImg: ReactNode;
   popularSearches: string[];
 };

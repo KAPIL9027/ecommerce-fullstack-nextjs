@@ -8,8 +8,8 @@ const MainHeaderIcon = () => {
       focusable="false"
       viewBox="0 0 24 24"
       role="img"
-      width="78px"
-      height="78px"
+      width="100%"
+      height="100%"
       fill="none"
     >
       <path
