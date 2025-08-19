@@ -1,5 +1,5 @@
 "use client";
-import { MainHeaderData } from "@/types";
+import { MainHeaderData, SearchType } from "@/types";
 import Link from "next/link";
 import React, { useState } from "react";
 import CategoryMenu from "./CategoryMenu";
@@ -18,17 +18,21 @@ const popularSearches = [
 ];
 const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   const [isOpen, setIsOpen] = useState<boolean>();
+  const [show, setShow] = useState<boolean>();
   return (
     <div className="w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
-      {isOpen && (
+      {show && (
         <SearchModal
           popularSearches={popularSearches}
           LogoImg={mainLogo.img}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
+          setShow={setShow}
         />
       )}
-      <Link href={mainLogo.redirectTo}>{mainLogo.img}</Link>
+      <div className="w-[77px] h-[77px]">
+        <Link href={mainLogo.redirectTo}>{mainLogo.img}</Link>
+      </div>
       <div>
         <CategoryMenu navItems={navItems} />
       </div>
@@ -39,11 +43,14 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
               {idx === 0 ? (
                 <div
                   onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-                    setIsOpen(true);
+                    setShow(true);
+                    setTimeout(() => setIsOpen(true), 10);
                   }}
-                  className="xl:w-[168px] xl:h-9"
+                  className={`xl:w-[168px] xl:h-9 transform transition-all duration-200 ${
+                    isOpen ? "-translate-x-20" : "translate-x-0"
+                  }`}
                 >
-                  {<Search />}
+                  {<Search type={SearchType.NAVBAR} />}
                 </div>
               ) : (
                 <span>{icon.img}</span>

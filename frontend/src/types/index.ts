@@ -55,9 +55,19 @@ export type HeaderPropsType = {
   };
 };
 
+export type SearchProps = {
+  type: SearchType;
+};
+
 export type SearchModalProps = {
-  isOpen: boolean;
+  isOpen: boolean | undefined;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  setShow: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   LogoImg: ReactNode;
   popularSearches: string[];
 };
+
+export enum SearchType {
+  MODAL,
+  NAVBAR
+}
