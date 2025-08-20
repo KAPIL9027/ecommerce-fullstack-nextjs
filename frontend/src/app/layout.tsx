@@ -60,74 +60,250 @@ const headerData: HeaderPropsType = {
       {
         text: "New & Featured",
         redirectTo: "/new",
-        subcategory: {
-          text: "Featured",
-          redirectTo: "/featured",
-          subcategories: [
-            {
-              text: "New & Upcoming Drops",
-              redirectTo: "/new-upcoming-drops",
-            },
-            {
-              text: "New Arrivals",
-              redirectTo: "/new-upcoming-drops",
-            },
-          ],
-        },
+        subcategories: [
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+        ],
       },
       {
         text: "Men",
         redirectTo: "/men",
-        subcategory: {
-          text: "Featured",
-          redirectTo: "/featured",
-          subcategories: [
-            {
-              text: "New & Upcoming Drops",
-              redirectTo: "/new-upcoming-drops",
-            },
-            {
-              text: "New Arrivals",
-              redirectTo: "/new-upcoming-drops",
-            },
-          ],
-        },
+        subcategories: [
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+        ],
       },
       {
         text: "Women",
         redirectTo: "/women",
-        subcategory: {
-          text: "Featured",
-          redirectTo: "/featured",
-          subcategories: [
-            {
-              text: "New & Upcoming Drops",
-              redirectTo: "/new-upcoming-drops",
-            },
-            {
-              text: "New Arrivals",
-              redirectTo: "/new-upcoming-drops",
-            },
-          ],
-        },
+        subcategories: [
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+        ],
       },
       {
         text: "Kids",
         redirectTo: "/kids",
-        subcategory: {
-          text: "Featured",
-          redirectTo: "/featured",
-          subcategories: [
-            {
-              text: "New & Upcoming Drops",
-              redirectTo: "/new-upcoming-drops",
-            },
-            {
-              text: "New Arrivals",
-              redirectTo: "/new-upcoming-drops",
-            },
-          ],
-        },
+        subcategories: [
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+          {
+            text: "Featured",
+            redirectTo: "/featured",
+            childsubCategories: [
+              {
+                text: "New & Upcoming Drops",
+                redirectTo: "/new-upcoming-drops",
+              },
+              {
+                text: "New Arrivals",
+                redirectTo: "/new-upcoming-drops",
+              },
+            ],
+          },
+        ],
       },
     ],
     icons: [

@@ -24,13 +24,11 @@ export type SearchDataProps = {
   altText: string;
   redirectTo: string;
 };
-export type CategoryNavItem = {
-  text: string;
-  redirectTo: string;
-  subcategory: {
+
+export type SubCategoryType = {
     text: string;
     redirectTo: string;
-    subcategories: [
+    childsubCategories: [
       {
         text: string;
         redirectTo: string;
@@ -40,7 +38,11 @@ export type CategoryNavItem = {
         redirectTo: string;
       }
     ];
-  };
+  }
+export type CategoryNavItem = {
+  text: string;
+  redirectTo: string;
+  subcategories: SubCategoryType[];
 };
 export interface CategoryMenuProps {
   navItems: CategoryNavItem[];
@@ -69,5 +71,5 @@ export type SearchModalProps = {
 
 export enum SearchType {
   MODAL,
-  NAVBAR
+  NAVBAR,
 }
