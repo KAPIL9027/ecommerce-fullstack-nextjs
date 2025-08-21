@@ -1,11 +1,16 @@
+"use client";
 import { CategoryMenuProps, SubCategoryType } from "@/types";
 import Link from "next/link";
-import React, { MouseEventHandler, useState } from "react";
+import React, { MouseEventHandler, useEffect, useState } from "react";
+import CategoryMenuModal from "./CategoryMenuModal";
 
 const CategoryMenu = ({ navItems }: CategoryMenuProps) => {
   const [subcategories, setSubCategories] = useState<SubCategoryType[]>([]);
-  const [isOpen, setIsOpen] = useState<boolean>();
-  const [animate, setAnimate] = useState<boolean>();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [animate, setAnimate] = useState<boolean>(false);
+  useEffect(() => {
+    console.log("subcategories", subcategories);
+  }, [subcategories]);
   return (
     <ul className="flex w-full gap-6">
       {navItems.map((navItem, idx) => {
@@ -16,10 +21,11 @@ const CategoryMenu = ({ navItems }: CategoryMenuProps) => {
               className="font-medium text-[16px] text-[#111111] p-1 hover:border-b-2"
               onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
                 // do something
+                setSubCategories(navItem.subcategories);
                 setIsOpen(true);
-                setTimeout(()=>{
-                  setAnimate(true)
-                },300);
+                setTimeout(() => {
+                  setAnimate(true);
+                }, 300);
               }}
             >
               {navItem.text}
@@ -27,6 +33,11 @@ const CategoryMenu = ({ navItems }: CategoryMenuProps) => {
           </li>
         );
       })}
+      {isOpen && (
+        <div className="absolute bottom-0">
+          <CategoryMenuModal subcategories={subcategories} />
+        </div>
+      )}
     </ul>
   );
 };

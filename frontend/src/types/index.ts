@@ -25,20 +25,19 @@ export type SearchDataProps = {
   redirectTo: string;
 };
 
+export type ChildSubcategory = {
+  text: string;
+  redirectTo: string;
+};
+
 export type SubCategoryType = {
-    text: string;
-    redirectTo: string;
-    childsubCategories: [
-      {
-        text: string;
-        redirectTo: string;
-      },
-      {
-        text: string;
-        redirectTo: string;
-      }
-    ];
-  }
+  text: string;
+  redirectTo: string;
+  childSubcategories: ChildSubcategory[];
+};
+export type CategoryModalProps = {
+  subcategories: SubCategoryType[];
+};
 export type CategoryNavItem = {
   text: string;
   redirectTo: string;

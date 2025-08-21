@@ -64,7 +64,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -78,7 +78,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -92,7 +92,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -106,7 +106,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -126,7 +126,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -140,7 +140,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -154,7 +154,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -168,7 +168,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -188,7 +188,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -202,7 +202,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -216,7 +216,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -230,7 +230,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -250,7 +250,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -264,7 +264,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -278,7 +278,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
@@ -292,7 +292,7 @@ const headerData: HeaderPropsType = {
           {
             text: "Featured",
             redirectTo: "/featured",
-            childsubCategories: [
+            childSubcategories: [
               {
                 text: "New & Upcoming Drops",
                 redirectTo: "/new-upcoming-drops",
