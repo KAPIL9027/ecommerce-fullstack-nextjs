@@ -1,43 +1,34 @@
 "use client";
-import { CategoryMenuProps, SubCategoryType } from "@/types";
+import { CategoryMenuProps } from "@/types";
 import Link from "next/link";
-import React, { MouseEventHandler, useEffect, useState } from "react";
-import CategoryMenuModal from "./CategoryMenuModal";
+import React from "react";
 
-const CategoryMenu = ({ navItems }: CategoryMenuProps) => {
-  const [subcategories, setSubCategories] = useState<SubCategoryType[]>([]);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [animate, setAnimate] = useState<boolean>(false);
-  useEffect(() => {
-    console.log("subcategories", subcategories);
-  }, [subcategories]);
+const CategoryMenu = ({
+  navItems,
+  setSubCategories,
+  setAnimateCategoryMenu,
+  setOpenCategoryMenu,
+}: CategoryMenuProps) => {
   return (
     <ul className="flex w-full gap-6">
       {navItems.map((navItem, idx) => {
         return (
-          <li key={`navItem-${navItem.text}-${idx}`}>
-            <Link
-              href={navItem.redirectTo}
-              className="font-medium text-[16px] text-[#111111] p-1 hover:border-b-2"
-              onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                // do something
-                setSubCategories(navItem.subcategories);
-                setIsOpen(true);
-                setTimeout(() => {
-                  setAnimate(true);
-                }, 300);
-              }}
-            >
-              {navItem.text}
-            </Link>
+          <li
+            key={`navItem-${navItem.text}-${idx}`}
+            className="font-semibold text-[16px] text-[#111111] p-1 hover:border-b-2 cursor-pointer"
+            onMouseEnter={(e: React.MouseEvent<HTMLLIElement>) => {
+              // do something
+              setSubCategories(navItem.subcategories);
+              setOpenCategoryMenu(true);
+              setTimeout(() => {
+                setAnimateCategoryMenu(true);
+              }, 300);
+            }}
+          >
+            <Link href={navItem.redirectTo}>{navItem.text}</Link>
           </li>
         );
       })}
-      {isOpen && (
-        <div className="absolute bottom-0">
-          <CategoryMenuModal subcategories={subcategories} />
-        </div>
-      )}
     </ul>
   );
 };

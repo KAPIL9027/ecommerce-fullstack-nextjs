@@ -1,10 +1,11 @@
 "use client";
-import { MainHeaderData, SearchType } from "@/types";
+import { MainHeaderData, SearchType, SubCategoryType } from "@/types";
 import Link from "next/link";
 import React, { useState } from "react";
 import CategoryMenu from "./CategoryMenu";
 import Search from "./Search";
 import SearchModal from "./SearchModal";
+import CategoryMenuModal from "./CategoryMenuModal";
 
 const popularSearches = [
   "on court styles",
@@ -19,8 +20,12 @@ const popularSearches = [
 const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   const [isOpen, setIsOpen] = useState<boolean>();
   const [show, setShow] = useState<boolean>();
+  const [subcategories, setSubCategories] = useState<SubCategoryType[]>([]);
+  const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
+  const [animateCategoryMenu, setAnimateCategoryMenu] =
+    useState<boolean>(false);
   return (
-    <div className="w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
+    <div className="relative w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
       {show && (
         <SearchModal
           popularSearches={popularSearches}
@@ -30,11 +35,44 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
           setShow={setShow}
         />
       )}
+      {openCategoryMenu && (
+        <div
+          className="absolute top-[100%] left-0 w-full"
+          onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+            setAnimateCategoryMenu(false);
+            setTimeout(() => {
+              setOpenCategoryMenu(false);
+            }, 300);
+          }}
+        >
+          <CategoryMenuModal
+            subcategories={subcategories}
+            animateCategoryMenu
+          />
+        </div>
+      )}
       <div className="w-[77px] h-[77px]">
         <Link href={mainLogo.redirectTo}>{mainLogo.img}</Link>
       </div>
-      <div>
-        <CategoryMenu navItems={navItems} />
+      <div
+        onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = e.clientX;
+          if (x <= rect.left || x >= rect.right) {
+            setSubCategories([]);
+            setAnimateCategoryMenu(false);
+            setTimeout(() => {
+              setOpenCategoryMenu(false);
+            }, 300);
+          }
+        }}
+      >
+        <CategoryMenu
+          navItems={navItems}
+          setSubCategories={setSubCategories}
+          setOpenCategoryMenu={setOpenCategoryMenu}
+          setAnimateCategoryMenu={setAnimateCategoryMenu}
+        />
       </div>
       <ul className="flex gap-4 items-center mr-5">
         {icons.map((icon, idx) => {

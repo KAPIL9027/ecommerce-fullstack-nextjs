@@ -37,6 +37,7 @@ export type SubCategoryType = {
 };
 export type CategoryModalProps = {
   subcategories: SubCategoryType[];
+  animateCategoryMenu: boolean;
 };
 export type CategoryNavItem = {
   text: string;
@@ -45,6 +46,9 @@ export type CategoryNavItem = {
 };
 export interface CategoryMenuProps {
   navItems: CategoryNavItem[];
+  setSubCategories: React.Dispatch<React.SetStateAction<SubCategoryType[]>>;
+  setOpenCategoryMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setAnimateCategoryMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export type HeaderPropsType = {
   topHeaderData: TopBarData;
