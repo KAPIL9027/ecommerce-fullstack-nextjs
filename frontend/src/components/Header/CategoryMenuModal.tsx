@@ -7,25 +7,17 @@ const CategoryMenuModal = ({
   animateCategoryMenu,
 }: CategoryModalProps) => {
   return (
-    <div
-      className={`h-[40vh] bg-white flex flex-col items-center py-6 transform transition-all duration-300 ${
-        animateCategoryMenu
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 -translate-y-100"
-      }`}
-    >
-      <main
-        className={`w-[60%] flex flex-row justify-evenly items-center transform transition duration-700 ${
-          animateCategoryMenu
-            ? "translate-y-0 opacity-100"
-            : "opacity-0 -translate-y-full"
-        }`}
-      >
+    <div className={"h-[40vh] bg-white flex flex-col items-center py-6"}>
+      <main className="w-[60%] flex flex-row justify-evenly items-center">
         {subcategories.map((subcategory, idx1) => {
           return (
             <div
               key={`${subcategory.text}-${idx1}`}
-              className="flex flex-col gap-2"
+              className={`flex flex-col gap-2 transform transition-all duration-700 ${
+                animateCategoryMenu
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 -translate-y-10"
+              }`}
             >
               <h2 className="text-black hover:text-gray-400 text-sm font-semibold">
                 <Link href={subcategory.redirectTo}>{subcategory.text}</Link>

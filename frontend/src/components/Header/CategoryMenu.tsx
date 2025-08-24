@@ -17,7 +17,6 @@ const CategoryMenu = ({
             key={`navItem-${navItem.text}-${idx}`}
             className="font-semibold text-[16px] text-[#111111] p-1 hover:border-b-2 cursor-pointer"
             onMouseEnter={(e: React.MouseEvent<HTMLLIElement>) => {
-              // do something
               setSubCategories(navItem.subcategories);
               setOpenCategoryMenu(true);
               setTimeout(() => {

@@ -37,17 +37,29 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
       )}
       {openCategoryMenu && (
         <div
-          className="absolute top-[100%] left-0 w-full"
+          className={`absolute top-[100%] h-[40%] left-0 w-full transform transition-all duration-300 ${
+            animateCategoryMenu
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-5"
+          }`}
           onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
-            setAnimateCategoryMenu(false);
-            setTimeout(() => {
-              setOpenCategoryMenu(false);
-            }, 300);
+            const rect = e.currentTarget.getBoundingClientRect();
+            let y = e.clientY;
+            console.log();
+            console.log("y", y);
+            console.log(Math.floor(rect.bottom));
+            if (y >= Math.floor(rect.bottom)) {
+              setSubCategories([]);
+              setAnimateCategoryMenu(false);
+              setTimeout(() => {
+                setOpenCategoryMenu(false);
+              }, 300);
+            }
           }}
         >
           <CategoryMenuModal
             subcategories={subcategories}
-            animateCategoryMenu
+            animateCategoryMenu={animateCategoryMenu}
           />
         </div>
       )}
@@ -57,8 +69,8 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
       <div
         onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
           const rect = e.currentTarget.getBoundingClientRect();
-          const x = e.clientX;
-          if (x <= rect.left || x >= rect.right) {
+          let x = e.clientX;
+          if (x <= Math.floor(rect.left) || x >= Math.floor(rect.right)) {
             setSubCategories([]);
             setAnimateCategoryMenu(false);
             setTimeout(() => {
