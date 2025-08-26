@@ -1,7 +1,7 @@
 "use client";
 import { MainHeaderData, SearchType, SubCategoryType } from "@/types";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryMenu from "./CategoryMenu";
 import Search from "./Search";
 import SearchModal from "./SearchModal";
@@ -21,9 +21,19 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   const [isOpen, setIsOpen] = useState<boolean>();
   const [show, setShow] = useState<boolean>();
   const [subcategories, setSubCategories] = useState<SubCategoryType[]>([]);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
   const [animateCategoryMenu, setAnimateCategoryMenu] =
     useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div className="relative w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
       {show && (
@@ -37,23 +47,20 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
       )}
       {openCategoryMenu && (
         <div
-          className={`absolute top-[100%] h-[40%] left-0 w-full transform transition-all duration-300 ${
+          className={`z-10 absolute top-[100%] h-[40%] left-0 w-full transform transition-all duration-200 ${
             animateCategoryMenu
               ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-5"
+              : "opacity-0 -translate-y-1"
           }`}
           onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
             const rect = e.currentTarget.getBoundingClientRect();
             let y = e.clientY;
-            console.log();
-            console.log("y", y);
-            console.log(Math.floor(rect.bottom));
             if (y >= Math.floor(rect.bottom)) {
               setSubCategories([]);
               setAnimateCategoryMenu(false);
               setTimeout(() => {
                 setOpenCategoryMenu(false);
-              }, 300);
+              }, 200);
             }
           }}
         >
@@ -66,26 +73,30 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
       <div className="w-[77px] h-[77px]">
         <Link href={mainLogo.redirectTo}>{mainLogo.img}</Link>
       </div>
-      <div
-        onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          let x = e.clientX;
-          if (x <= Math.floor(rect.left) || x >= Math.floor(rect.right)) {
-            setSubCategories([]);
-            setAnimateCategoryMenu(false);
-            setTimeout(() => {
-              setOpenCategoryMenu(false);
-            }, 300);
-          }
-        }}
-      >
-        <CategoryMenu
-          navItems={navItems}
-          setSubCategories={setSubCategories}
-          setOpenCategoryMenu={setOpenCategoryMenu}
-          setAnimateCategoryMenu={setAnimateCategoryMenu}
-        />
-      </div>
+      {!isMobile && (
+        <div
+          onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            let x = e.clientX;
+            if (x <= Math.floor(rect.left) || x >= Math.floor(rect.right)) {
+              setSubCategories([]);
+              setAnimateCategoryMenu(false);
+              setTimeout(() => {
+                setOpenCategoryMenu(false);
+              }, 200);
+            }
+          }}
+        >
+          <CategoryMenu
+            navItems={navItems}
+            subCategories={subcategories}
+            setSubCategories={setSubCategories}
+            setOpenCategoryMenu={setOpenCategoryMenu}
+            setAnimateCategoryMenu={setAnimateCategoryMenu}
+            isMobile={false}
+          />
+        </div>
+      )}
       <ul className="flex gap-4 items-center mr-5">
         {icons.map((icon, idx) => {
           return (

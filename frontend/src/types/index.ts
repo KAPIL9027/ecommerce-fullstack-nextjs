@@ -46,9 +46,11 @@ export type CategoryNavItem = {
 };
 export interface CategoryMenuProps {
   navItems: CategoryNavItem[];
+  subCategories: SubCategoryType[];
   setSubCategories: React.Dispatch<React.SetStateAction<SubCategoryType[]>>;
   setOpenCategoryMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setAnimateCategoryMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  isMobile: boolean;
 }
 export type HeaderPropsType = {
   topHeaderData: TopBarData;

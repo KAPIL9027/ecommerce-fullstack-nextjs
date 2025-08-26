@@ -13,10 +13,10 @@ const CategoryMenuModal = ({
           return (
             <div
               key={`${subcategory.text}-${idx1}`}
-              className={`flex flex-col gap-2 transform transition-all duration-700 ${
+              className={`flex flex-col gap-2 transform transition-all duration-400 ${
                 animateCategoryMenu
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 -translate-y-10"
+                  : "opacity-0 -translate-y-1"
               }`}
             >
               <h2 className="text-black hover:text-gray-400 text-sm font-semibold">
