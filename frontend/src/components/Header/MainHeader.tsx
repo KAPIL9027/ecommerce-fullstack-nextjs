@@ -1,5 +1,5 @@
 "use client";
-import { MainHeaderData, SearchType, SubCategoryType } from "@/types";
+import { Logo, MainHeaderData, SearchType, SubCategoryType } from "@/types";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import CategoryMenu from "./CategoryMenu";
@@ -17,6 +17,27 @@ const popularSearches = [
   "jordan",
   "running shoes",
 ];
+
+const shouldShowIcon = (icon: Logo, isMobile: boolean): boolean => {
+  const altText = icon.altText;
+  switch (altText) {
+    case "profile-icon":
+    case "hamburger-icon":
+      if (isMobile) {
+        return true;
+      } else {
+        return false;
+      }
+    case "wishlist-icon":
+      if (isMobile) {
+        return false;
+      } else {
+        return true;
+      }
+    default:
+      return true;
+  }
+};
 const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   const [isOpen, setIsOpen] = useState<boolean>();
   const [show, setShow] = useState<boolean>();
@@ -98,27 +119,29 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
         </div>
       )}
       <ul className="flex gap-4 items-center mr-5">
-        {icons.map((icon, idx) => {
-          return (
-            <li key={`navItem-${icon.altText}-${idx}`}>
-              {idx === 0 ? (
-                <div
-                  onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-                    setShow(true);
-                    setTimeout(() => setIsOpen(true), 10);
-                  }}
-                  className={`xl:w-[168px] xl:h-9 transform transition-all duration-200 ${
-                    isOpen ? "-translate-x-20" : "translate-x-0"
-                  }`}
-                >
-                  {<Search type={SearchType.NAVBAR} />}
-                </div>
-              ) : (
-                <span>{icon.img}</span>
-              )}
-            </li>
-          );
-        })}
+        {icons
+          .filter((icon, idx) => shouldShowIcon(icon, isMobile))
+          .map((icon, idx) => {
+            return (
+              <li key={`navItem-${icon.altText}-${idx}`}>
+                {icon.altText === "search-icon" ? (
+                  <div
+                    onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+                      setShow(true);
+                      setTimeout(() => setIsOpen(true), 10);
+                    }}
+                    className={`xl:w-[168px] xl:h-9 transform transition-all duration-200 ${
+                      isOpen ? "-translate-x-20" : "translate-x-0"
+                    }`}
+                  >
+                    {<Search type={SearchType.NAVBAR} />}
+                  </div>
+                ) : (
+                  <span>{icon.img}</span>
+                )}
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

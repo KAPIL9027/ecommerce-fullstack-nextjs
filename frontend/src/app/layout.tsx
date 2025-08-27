@@ -8,6 +8,8 @@ import SearchIcon from "@/components/icons/SearchIcon";
 import WishlistIcon from "@/components/icons/WishlistIcon";
 import CartIcon from "@/components/icons/CartIcon";
 import MainHeaderIcon from "@/components/icons/MainHeaderIcon";
+import HamburgerIcon from "@/components/icons/HamburgerIcon";
+import ProfileIcon from "@/components/icons/ProfileIcon";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -321,6 +323,16 @@ const headerData: HeaderPropsType = {
         img: <CartIcon />,
         altText: "cart-icon",
         redirectTo: "/cart",
+      },
+      {
+        img: <ProfileIcon />,
+        altText: "profile-icon",
+        redirectTo: "",
+      },
+      {
+        img: <HamburgerIcon />,
+        altText: "hamburger-icon",
+        redirectTo: "",
       },
     ],
   },
