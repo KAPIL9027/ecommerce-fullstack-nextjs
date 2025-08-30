@@ -1,6 +1,6 @@
 import React from "react";
 
-const HamburgerIcon = () => {
+const CloseIcon = () => {
   return (
     <svg
       aria-hidden="true"
@@ -14,10 +14,10 @@ const HamburgerIcon = () => {
       <path
         stroke="currentColor"
         strokeWidth="1.5"
-        d="M21 5.25H3M21 12H3m18 6.75H3"
+        d="M18.973 5.027L5.028 18.972m0-13.945l13.944 13.945"
       ></path>
     </svg>
   );
 };
 
-export default HamburgerIcon;
+export default CloseIcon;

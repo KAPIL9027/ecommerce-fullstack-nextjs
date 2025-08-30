@@ -1,6 +1,6 @@
 import React from "react";
 
-const HamburgerIcon = () => {
+const RightArrow = () => {
   return (
     <svg
       aria-hidden="true"
@@ -13,11 +13,11 @@ const HamburgerIcon = () => {
     >
       <path
         stroke="currentColor"
-        strokeWidth="1.5"
-        d="M21 5.25H3M21 12H3m18 6.75H3"
+        stroke-width="1.5"
+        d="M8.474 18.966L15.44 12 8.474 5.033"
       ></path>
     </svg>
   );
 };
 
-export default HamburgerIcon;
+export default RightArrow;

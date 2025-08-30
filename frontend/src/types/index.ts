@@ -78,3 +78,20 @@ export enum SearchType {
   MODAL,
   NAVBAR,
 }
+
+export type HamburgerMenuModalProps = {
+  navItems: CategoryNavItem[];
+  setOpenHamburgerMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setAnimateCategoryMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentCategoryLevel: React.Dispatch<
+    React.SetStateAction<CurrentCategoryLevel[]>
+  >;
+  currentCategoryLevel: CurrentCategoryLevel[];
+  animateCategoryMenu: boolean;
+  children: ReactNode;
+};
+
+export type CurrentCategoryLevel = {
+  level: string;
+  data: SubCategoryType[];
+};

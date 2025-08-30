@@ -1,11 +1,19 @@
 "use client";
-import { Logo, MainHeaderData, SearchType, SubCategoryType } from "@/types";
+import {
+  CategoryNavItem,
+  CurrentCategoryLevel,
+  Logo,
+  MainHeaderData,
+  SearchType,
+  SubCategoryType,
+} from "@/types";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import CategoryMenu from "./CategoryMenu";
 import Search from "./Search";
 import SearchModal from "./SearchModal";
 import CategoryMenuModal from "./CategoryMenuModal";
+import HamburgerMenuModal from "./HamburgerMenuModal";
 
 const popularSearches = [
   "on court styles",
@@ -38,14 +46,44 @@ const shouldShowIcon = (icon: Logo, isMobile: boolean): boolean => {
       return true;
   }
 };
+
 const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   const [isOpen, setIsOpen] = useState<boolean>();
   const [show, setShow] = useState<boolean>();
   const [subcategories, setSubCategories] = useState<SubCategoryType[]>([]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [currentCategoryLevel, setCurrentCategoryLevel] = useState<
+    CurrentCategoryLevel[]
+  >([]);
   const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
   const [animateCategoryMenu, setAnimateCategoryMenu] =
     useState<boolean>(false);
+  const [openHamburgerMenu, setOpenHamburgerMenu] = useState<boolean>(false);
+
+  const openHamburger = () => {
+    setOpenHamburgerMenu(true);
+    setTimeout(() => {
+      setAnimateCategoryMenu(true);
+    }, 300);
+  };
+  const handleOnClick = (e: React.MouseEvent<HTMLLIElement>) => {
+    let type = e.currentTarget.dataset.iconType;
+    switch (type) {
+      case "hamburger-icon":
+        openHamburger();
+        break;
+      case "wishlist-icon":
+        // do wishlist stuff
+        break;
+      case "profile-icon":
+        // open profile menu
+        break;
+      case "cart-icon":
+      // open cart menu
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,8 +93,10 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {});
   return (
-    <div className="relative w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
+    <div className="relative z-1 w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
       {show && (
         <SearchModal
           popularSearches={popularSearches}
@@ -118,12 +158,35 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
           />
         </div>
       )}
+
+      {isMobile && openHamburgerMenu && (
+        <div className="z-10 fixed top-0 right-0">
+          <HamburgerMenuModal
+            navItems={navItems}
+            setOpenHamburgerMenu={setOpenHamburgerMenu}
+            animateCategoryMenu={animateCategoryMenu}
+            setAnimateCategoryMenu={setAnimateCategoryMenu}
+            currentCategoryLevel={currentCategoryLevel}
+            setCurrentCategoryLevel={setCurrentCategoryLevel}
+          >
+            {currentCategoryLevel.length === 0 ? (
+              <ParentCategoryView data={navItems} />
+            ) : (
+              <ChildCategoryView data={currentCategoryLevel[0].data} />
+            )}
+          </HamburgerMenuModal>
+        </div>
+      )}
       <ul className="flex gap-4 items-center mr-5">
         {icons
           .filter((icon, idx) => shouldShowIcon(icon, isMobile))
           .map((icon, idx) => {
             return (
-              <li key={`navItem-${icon.altText}-${idx}`}>
+              <li
+                key={`navItem-${icon.altText}-${idx}`}
+                data-icon-type={icon.altText}
+                onClick={handleOnClick}
+              >
                 {icon.altText === "search-icon" ? (
                   <div
                     onClick={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -145,6 +208,14 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
       </ul>
     </div>
   );
+};
+
+const ParentCategoryView = ({ data }: { data: CategoryNavItem[] }) => {
+  return <div>Parent Category</div>;
+};
+
+const ChildCategoryView = ({ data }: { data: SubCategoryType[] }) => {
+  return <div>Child Category View</div>;
 };
 
 export default MainHeader;
