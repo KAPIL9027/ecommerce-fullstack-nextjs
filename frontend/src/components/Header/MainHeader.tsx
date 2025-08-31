@@ -8,12 +8,20 @@ import {
   SubCategoryType,
 } from "@/types";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import CategoryMenu from "./CategoryMenu";
 import Search from "./Search";
 import SearchModal from "./SearchModal";
 import CategoryMenuModal from "./CategoryMenuModal";
 import HamburgerMenuModal from "./HamburgerMenuModal";
+import RightArrow from "../icons/RightArrow";
+import HeaderIcon from "../icons/HeaderIcon";
+import Button from "../atoms/Button";
+import HelpIcon from "../icons/HelpIcon";
+import CartIcon from "../icons/CartIcon";
+import OrdersIcon from "../icons/OrdersIcon";
+import StoreIcon from "../icons/StoreIcon";
+import HamburgerIcon from "../icons/HamburgerIcon";
 
 const popularSearches = [
   "on court styles",
@@ -24,6 +32,29 @@ const popularSearches = [
   "sneakers men",
   "jordan",
   "running shoes",
+];
+
+let hamburgerIcons: { text: string; redirectTo: string; icon: ReactNode }[] = [
+  {
+    text: "Help",
+    redirectTo: "/help",
+    icon: <HelpIcon />,
+  },
+  {
+    text: "Bag",
+    redirectTo: "/cart",
+    icon: <CartIcon />,
+  },
+  {
+    text: "Orders",
+    redirectTo: "/orders",
+    icon: <OrdersIcon />,
+  },
+  {
+    text: "Find a Store",
+    redirectTo: "/store",
+    icon: <StoreIcon />,
+  },
 ];
 
 const shouldShowIcon = (icon: Logo, isMobile: boolean): boolean => {
@@ -66,6 +97,7 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
       setAnimateCategoryMenu(true);
     }, 300);
   };
+
   const handleOnClick = (e: React.MouseEvent<HTMLLIElement>) => {
     let type = e.currentTarget.dataset.iconType;
     switch (type) {
@@ -210,8 +242,94 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   );
 };
 
+const NavItem = ({
+  navItem,
+  type,
+}: {
+  navItem: CategoryNavItem;
+  type: string;
+}) => {
+  return (
+    <div
+      className={`flex flex-row items-center justify-between ${
+        type === "parent" ? "text-2xl" : "text-base"
+      } ${type === "parent" ? "text-black" : "text-gray-500"}`}
+    >
+      <p>{navItem.text}</p>
+      <div>{<RightArrow />}</div>
+    </div>
+  );
+};
+
+const NavIcon = ({ icon, text }: { icon: ReactNode; text: string }) => {
+  return (
+    <div className="flex flex-row gap-2 items-center font-semibold text-base">
+      <div>{icon}</div>
+      <p>{text}</p>
+    </div>
+  );
+};
 const ParentCategoryView = ({ data }: { data: CategoryNavItem[] }) => {
-  return <div>Parent Category</div>;
+  return (
+    <div className="pt-8 flex flex-col gap-12">
+      <div>
+        {
+          <ul className="flex flex-col gap-3 pl-4">
+            {data.map((categoryNavItem: CategoryNavItem, idx: number) => {
+              return (
+                <div key={`${categoryNavItem.text}-${idx}`}>
+                  {<NavItem navItem={categoryNavItem} type={"parent"} />}
+                </div>
+              );
+            })}
+          </ul>
+        }
+      </div>
+      <div className="flex items-center gap-3">
+        <span className="w-8 h-8">
+          <HeaderIcon />
+        </span>
+        <p className="text-base font-semibold pl-2">Jordan</p>
+      </div>
+      <div>
+        <div className="text-[#707072] text-xl pl-4">
+          <p>
+            Become a Nike Member for the best products, inspiration and stories
+            in sport.{" "}
+            <Link href="">
+              <span className="font-semibold text-black">Learn more</span>
+            </Link>
+          </p>
+          <div className="flex gap-2 mt-4">
+            <div className="">
+              <Button
+                text={"Join Us"}
+                bg={"black"}
+                border={false}
+                onClick={() => {}}
+              />
+            </div>
+            <div>
+              <Button
+                text={"Sign In"}
+                bg={"transparent"}
+                border={true}
+                onClick={() => {}}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul className="flex flex-col gap-4 pl-4">
+        {hamburgerIcons.map((hamburgerIcon, idx) => {
+          return (
+            <NavIcon icon={hamburgerIcon.icon} text={hamburgerIcon.text} />
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
 
 const ChildCategoryView = ({ data }: { data: SubCategoryType[] }) => {

@@ -12,18 +12,19 @@ const HamburgerMenuModal = ({
   currentCategoryLevel,
   setCurrentCategoryLevel,
 }: HamburgerMenuModalProps) => {
-  
   return (
-    <div className="w-[60vw] large:w-[40vw] flex flex-col h-screen bg-white text-black">
+    <div className="w-[60vw] sm:w-[45vw] flex flex-col h-screen bg-white text-black px-4 py-6 overflow-scroll">
       <div
-        className="w-full flex flex-row-reverse mb-4"
+        className="w-full flex justify-between mb-4"
         onClick={() => {
           setOpenHamburgerMenu(false);
         }}
       >
-        <div>
-          <LeftArrow/>
-          <p>New & Featured</p>
+        <div className="flex items-center gap-3">
+          <div>
+            <LeftArrow />
+          </div>
+          <p className="text-[16px] font-semibold">New & Featured</p>
         </div>
         <CloseIcon />
       </div>

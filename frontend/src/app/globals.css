@@ -13,6 +13,7 @@
 }
 @theme {
   --breakpoint-large: 60rem;
+  
 }
 @media (prefers-color-scheme: dark) {
   :root {

@@ -1,0 +1,24 @@
+import React from "react";
+
+const HelpIcon = () => {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      viewBox="0 0 24 24"
+      role="img"
+      width="24px"
+      height="24px"
+      fill="none"
+    >
+      <path
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeWidth="1.5"
+        d="M11.99 18v-1.5M9 9.75a3 3 0 114.29 2.71c-.78.37-1.29 1.16-1.29 2.03V15m9.75-3c0 5.385-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12 6.615 2.25 12 2.25s9.75 4.365 9.75 9.75z"
+      ></path>
+    </svg>
+  );
+};
+
+export default HelpIcon;
