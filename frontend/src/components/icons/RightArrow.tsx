@@ -13,7 +13,7 @@ const RightArrow = () => {
     >
       <path
         stroke="currentColor"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         d="M8.474 18.966L15.44 12 8.474 5.033"
       ></path>
     </svg>

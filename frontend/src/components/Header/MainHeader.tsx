@@ -1,6 +1,7 @@
 "use client";
 import {
   CategoryNavItem,
+  ChildSubcategory,
   CurrentCategoryLevel,
   Logo,
   MainHeaderData,
@@ -117,6 +118,9 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
     }
   };
 
+  const handleNavItemClick = (newCategoryLevel: CurrentCategoryLevel) => {
+    setCurrentCategoryLevel([...currentCategoryLevel, newCategoryLevel]);
+  };
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -126,7 +130,6 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {});
   return (
     <div className="relative z-1 w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
       {show && (
@@ -202,9 +205,16 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
             setCurrentCategoryLevel={setCurrentCategoryLevel}
           >
             {currentCategoryLevel.length === 0 ? (
-              <ParentCategoryView data={navItems} />
+              <ParentCategoryView
+                data={navItems}
+                handleNavItemClick={handleNavItemClick}
+              />
             ) : (
-              <ChildCategoryView data={currentCategoryLevel[0].data} />
+              <ChildCategoryView
+                data={
+                  currentCategoryLevel[currentCategoryLevel.length - 1].data
+                }
+              />
             )}
           </HamburgerMenuModal>
         </div>
@@ -269,7 +279,13 @@ const NavIcon = ({ icon, text }: { icon: ReactNode; text: string }) => {
     </div>
   );
 };
-const ParentCategoryView = ({ data }: { data: CategoryNavItem[] }) => {
+const ParentCategoryView = ({
+  data,
+  handleNavItemClick,
+}: {
+  data: CategoryNavItem[];
+  handleNavItemClick: (newCurrentCategoryLevel: CurrentCategoryLevel) => void;
+}) => {
   return (
     <div className="pt-8 flex flex-col gap-12">
       <div>
@@ -277,7 +293,15 @@ const ParentCategoryView = ({ data }: { data: CategoryNavItem[] }) => {
           <ul className="flex flex-col gap-3 pl-4">
             {data.map((categoryNavItem: CategoryNavItem, idx: number) => {
               return (
-                <div key={`${categoryNavItem.text}-${idx}`}>
+                <div
+                  key={`${categoryNavItem.text}-${idx}`}
+                  onClick={() =>
+                    handleNavItemClick({
+                      level: "children",
+                      data: categoryNavItem,
+                    })
+                  }
+                >
                   {<NavItem navItem={categoryNavItem} type={"parent"} />}
                 </div>
               );
@@ -301,7 +325,7 @@ const ParentCategoryView = ({ data }: { data: CategoryNavItem[] }) => {
             </Link>
           </p>
           <div className="flex gap-2 mt-4">
-            <div className="">
+            <div>
               <Button
                 text={"Join Us"}
                 bg={"black"}
@@ -321,10 +345,14 @@ const ParentCategoryView = ({ data }: { data: CategoryNavItem[] }) => {
         </div>
       </div>
 
-      <ul className="flex flex-col gap-4 pl-4">
+      <ul className="flex flex-col gap-4 pl-4 pt-8 pb-32">
         {hamburgerIcons.map((hamburgerIcon, idx) => {
           return (
-            <NavIcon icon={hamburgerIcon.icon} text={hamburgerIcon.text} />
+            <NavIcon
+              key={`icon-${idx}-${hamburgerIcon.text}`}
+              icon={hamburgerIcon.icon}
+              text={hamburgerIcon.text}
+            />
           );
         })}
       </ul>
@@ -332,8 +360,24 @@ const ParentCategoryView = ({ data }: { data: CategoryNavItem[] }) => {
   );
 };
 
-const ChildCategoryView = ({ data }: { data: SubCategoryType[] }) => {
-  return <div>Child Category View</div>;
+const ChildCategoryView = ({
+  data,
+}: {
+  data: SubCategoryType | CategoryNavItem;
+}) => {
+  let type = "subcategories" in data ? 'subcategories' : 'childSubcategories'; 
+  return (
+    <div>
+      <p>{data.text}</p>
+      <ul>
+        {
+          (data[type]).map((navItem: (SubCategoryType | ChildSubcategory)=> {
+
+          }))
+        }
+      </ul>
+    </div>
+  );
 };
 
 export default MainHeader;

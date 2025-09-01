@@ -6,7 +6,9 @@ const TopBar = ({ logo, navItems }: TopBarData) => {
   return (
     <div className="bg-[#F5F5F5] w-full justify-between items-center px-12 h-9 hidden large:flex">
       <Link className="text-black" href={logo.redirectTo}>
-        <span>{logo.img}</span>
+        <div className="w-8 h-8">
+          <span>{logo.img}</span>
+        </div>
       </Link>
       <ul className="w-3xs flex gap-2 items-center text-black font-bold">
         {navItems.map((navItem: NavItem, idx: number) => {

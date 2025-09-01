@@ -15,9 +15,10 @@ const Button = ({
 
   return (
     <button
-      className={`w-full bg-${bg} ${textColor} text-base rounded-3xl flex items-center justify-center px-4 py-2 ${
-        border ? "border border-[#CACACB]" : ""
-      }`}
+      className={`w-full bg-${bg} ${textColor} text-base rounded-3xl flex items-center justify-center px-4 py-2 
+      ${border ? "border border-[#CACACB]" : ""}
+      `}
+      onClick={onClick}
     >
       {text}
     </button>
