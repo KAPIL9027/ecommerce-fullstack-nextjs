@@ -214,6 +214,7 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
                 data={
                   currentCategoryLevel[currentCategoryLevel.length - 1].data
                 }
+                handleNavItemClick={handleNavItemClick}
               />
             )}
           </HamburgerMenuModal>
@@ -256,9 +257,16 @@ const NavItem = ({
   navItem,
   type,
 }: {
-  navItem: CategoryNavItem;
+  navItem: CategoryNavItem | SubCategoryType | ChildSubcategory;
   type: string;
 }) => {
+  let items: (CategoryNavItem | SubCategoryType | ChildSubcategory)[] = [];
+  if ("subcategories" in navItem) {
+    items = navItem.subcategories;
+  } else if ("childSubcategories" in navItem) {
+    items = navItem.childSubcategories;
+  }
+  let haveChildren: boolean = items.length > 0;
   return (
     <div
       className={`flex flex-row items-center justify-between ${
@@ -266,7 +274,7 @@ const NavItem = ({
       } ${type === "parent" ? "text-black" : "text-gray-500"}`}
     >
       <p>{navItem.text}</p>
-      <div>{<RightArrow />}</div>
+      {haveChildren && <div className="text-black">{<RightArrow />}</div>}
     </div>
   );
 };
@@ -362,19 +370,33 @@ const ParentCategoryView = ({
 
 const ChildCategoryView = ({
   data,
+  handleNavItemClick,
 }: {
-  data: SubCategoryType | CategoryNavItem;
+  data: SubCategoryType | CategoryNavItem | ChildSubcategory;
+  handleNavItemClick: (newCurrentCategoryLevel: CurrentCategoryLevel) => void;
 }) => {
-  let type = "subcategories" in data ? 'subcategories' : 'childSubcategories'; 
+  let items: (SubCategoryType | ChildSubcategory)[] = [];
+  if ("subcategories" in data) {
+    items = data.subcategories;
+  } else if ("childSubcategories" in data) {
+    items = data.childSubcategories;
+  }
   return (
-    <div>
-      <p>{data.text}</p>
-      <ul>
-        {
-          (data[type]).map((navItem: (SubCategoryType | ChildSubcategory)=> {
-
-          }))
-        }
+    <div className="px-2 flex flex-col gap-5 pt-8">
+      <p className="text-2xl font-semibold text-[#111111]">{data.text}</p>
+      <ul className="flex flex-col gap-4">
+        {items.map((navItem, idx) => {
+          return (
+            <div
+              onClick={() =>
+                handleNavItemClick({ level: "subchildren", data: navItem })
+              }
+              key={`category-${navItem.text}-${idx}`}
+            >
+              <NavItem navItem={navItem} type="children" />
+            </div>
+          );
+        })}
       </ul>
     </div>
   );

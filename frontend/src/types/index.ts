@@ -93,5 +93,5 @@ export type HamburgerMenuModalProps = {
 
 export type CurrentCategoryLevel = {
   level: string;
-  data: SubCategoryType | CategoryNavItem;
+  data: SubCategoryType | CategoryNavItem | ChildSubcategory;
 };
