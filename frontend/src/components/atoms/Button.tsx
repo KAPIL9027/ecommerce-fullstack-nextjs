@@ -11,11 +11,11 @@ const Button = ({
   border: boolean;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
-  let textColor = bg === "black" ? "text-white" : "text-black";
+  let customCss: string = bg === "black" ? "bg-black text-white" : "text-black";
 
   return (
     <button
-      className={`w-full bg-${bg} ${textColor} text-base rounded-3xl flex items-center justify-center px-4 py-2 
+      className={`w-full ${customCss} text-base rounded-3xl flex items-center justify-center px-4 py-2 
       ${border ? "border border-[#CACACB]" : ""}
       `}
       onClick={onClick}

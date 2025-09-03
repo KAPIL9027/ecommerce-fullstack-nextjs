@@ -267,14 +267,27 @@ const NavItem = ({
     items = navItem.childSubcategories;
   }
   let haveChildren: boolean = items.length > 0;
+
   return (
     <div
-      className={`flex flex-row items-center justify-between ${
+      className={`flex flex-row group items-center justify-between cursor-pointer ${
         type === "parent" ? "text-2xl" : "text-base"
-      } ${type === "parent" ? "text-black" : "text-gray-500"}`}
+      }`}
     >
-      <p>{navItem.text}</p>
-      {haveChildren && <div className="text-black">{<RightArrow />}</div>}
+      <p
+        className={`${
+          type === "parent"
+            ? "text-black group-hover:text-gray-500"
+            : "text-gray-500"
+        }`}
+      >
+        {navItem.text}
+      </p>
+      {haveChildren && (
+        <div className={"text-black group-hover:text-gray-500"}>
+          {<RightArrow />}
+        </div>
+      )}
     </div>
   );
 };
