@@ -78,6 +78,19 @@ const shouldShowIcon = (icon: Logo, isMobile: boolean): boolean => {
       return true;
   }
 };
+const haveChildren: (
+  navItem: CategoryNavItem | SubCategoryType | ChildSubcategory
+) => boolean = (
+  navItem: CategoryNavItem | SubCategoryType | ChildSubcategory
+) => {
+  let items: (CategoryNavItem | SubCategoryType | ChildSubcategory)[] = [];
+  if ("subcategories" in navItem) {
+    items = navItem.subcategories;
+  } else if ("childSubcategories" in navItem) {
+    items = navItem.childSubcategories;
+  }
+  return items.length > 0;
+};
 
 const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   const [isOpen, setIsOpen] = useState<boolean>();
@@ -117,8 +130,9 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
         break;
     }
   };
-
   const handleNavItemClick = (newCategoryLevel: CurrentCategoryLevel) => {
+    let navItem = newCategoryLevel.data;
+    if (!haveChildren(navItem)) return;
     setCurrentCategoryLevel([...currentCategoryLevel, newCategoryLevel]);
   };
   useEffect(() => {
@@ -195,7 +209,7 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
       )}
 
       {isMobile && openHamburgerMenu && (
-        <div className="z-10 fixed top-0 right-0">
+        <div className="">
           <HamburgerMenuModal
             navItems={navItems}
             setOpenHamburgerMenu={setOpenHamburgerMenu}
@@ -243,7 +257,11 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
                     {<Search type={SearchType.NAVBAR} />}
                   </div>
                 ) : (
-                  <span>{icon.img}</span>
+                  <NavIcon
+                    icon={icon.img}
+                    text={icon.altText}
+                    type={"header"}
+                  />
                 )}
               </li>
             );
@@ -260,14 +278,6 @@ const NavItem = ({
   navItem: CategoryNavItem | SubCategoryType | ChildSubcategory;
   type: string;
 }) => {
-  let items: (CategoryNavItem | SubCategoryType | ChildSubcategory)[] = [];
-  if ("subcategories" in navItem) {
-    items = navItem.subcategories;
-  } else if ("childSubcategories" in navItem) {
-    items = navItem.childSubcategories;
-  }
-  let haveChildren: boolean = items.length > 0;
-
   return (
     <div
       className={`flex flex-row group items-center justify-between cursor-pointer ${
@@ -283,7 +293,7 @@ const NavItem = ({
       >
         {navItem.text}
       </p>
-      {haveChildren && (
+      {haveChildren(navItem) && (
         <div className={"text-black group-hover:text-gray-500"}>
           {<RightArrow />}
         </div>
@@ -292,11 +302,25 @@ const NavItem = ({
   );
 };
 
-const NavIcon = ({ icon, text }: { icon: ReactNode; text: string }) => {
+const NavIcon = ({
+  icon,
+  text,
+  type,
+}: {
+  icon: ReactNode;
+  text: string;
+  type: string;
+}) => {
   return (
-    <div className="flex flex-row gap-2 items-center font-semibold text-base">
+    <div
+      className={`${
+        type === "header"
+          ? "hover:bg-gray-300 rounded-3xl p-[6px]"
+          : "flex flex-row gap-2 items-center font-semibold text-base"
+      } cursor-pointer`}
+    >
       <div>{icon}</div>
-      <p>{text}</p>
+      {type === "hamburger" && <p>{text}</p>}
     </div>
   );
 };
@@ -330,7 +354,7 @@ const ParentCategoryView = ({
           </ul>
         }
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 cursor-pointer">
         <span className="w-8 h-8">
           <HeaderIcon />
         </span>
@@ -373,6 +397,7 @@ const ParentCategoryView = ({
               key={`icon-${idx}-${hamburgerIcon.text}`}
               icon={hamburgerIcon.icon}
               text={hamburgerIcon.text}
+              type={"hamburger"}
             />
           );
         })}

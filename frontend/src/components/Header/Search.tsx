@@ -16,7 +16,7 @@ const Search = ({ type }: SearchProps) => {
           : "xl:flex xl:items-center xl:bg-[#f5f5f5] xl:pr-1 xl:rounded-2xl xl:hover:bg-gray-200"
       } w-full h-full`}
     >
-      <span className="hover:bg-gray-300 rounded-[50%] flex items-center justify-center p-[6px]">
+      <span className="hover:bg-gray-300 rounded-3xl cursor-pointer flex items-center justify-center p-[6px]">
         <SearchIcon />
       </span>
       <input
