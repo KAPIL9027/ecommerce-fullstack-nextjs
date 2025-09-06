@@ -103,6 +103,7 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
   const [animateCategoryMenu, setAnimateCategoryMenu] =
     useState<boolean>(false);
+  const [animateSubCategory, setAnimateSubCategory] = useState(true);
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState<boolean>(false);
 
   const openHamburger = () => {
@@ -134,6 +135,10 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
     let navItem = newCategoryLevel.data;
     if (!haveChildren(navItem)) return;
     setCurrentCategoryLevel([...currentCategoryLevel, newCategoryLevel]);
+    setAnimateSubCategory(false);
+    setTimeout(() => {
+      setAnimateSubCategory(true);
+    }, 300);
   };
   useEffect(() => {
     const handleResize = () => {
@@ -145,7 +150,7 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   }, []);
 
   return (
-    <div className="relative z-1 w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium px-10">
+    <div className="relative z-1 w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium pl-10 pr-9">
       {show && (
         <SearchModal
           popularSearches={popularSearches}
@@ -234,7 +239,7 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
           </HamburgerMenuModal>
         </div>
       )}
-      <ul className="flex gap-4 items-center mr-5">
+      <ul className="flex gap-4 items-center">
         {icons
           .filter((icon, idx) => shouldShowIcon(icon, isMobile))
           .map((icon, idx) => {
@@ -315,11 +320,11 @@ const NavIcon = ({
     <div
       className={`${
         type === "header"
-          ? "hover:bg-gray-300 rounded-3xl p-[6px]"
+          ? "hover:bg-gray-300 hover:rounded-3xl hover:p-[6px]"
           : "flex flex-row gap-2 items-center font-semibold text-base"
       } cursor-pointer`}
     >
-      <div>{icon}</div>
+      <span>{icon}</span>
       {type === "hamburger" && <p>{text}</p>}
     </div>
   );
@@ -419,6 +424,7 @@ const ChildCategoryView = ({
   } else if ("childSubcategories" in data) {
     items = data.childSubcategories;
   }
+  const [swipeRight, setSwipeRight] = useState<boolean>(false);
   return (
     <div className="px-2 flex flex-col gap-5 pt-8">
       <p className="text-2xl font-semibold text-[#111111]">{data.text}</p>
@@ -426,9 +432,16 @@ const ChildCategoryView = ({
         {items.map((navItem, idx) => {
           return (
             <div
-              onClick={() =>
-                handleNavItemClick({ level: "subchildren", data: navItem })
-              }
+              className={`transition-all duration-300 transform ${
+                swipeRight ? "translate-x-100" : "translate-x-0"
+              }`}
+              onClick={() => {
+                handleNavItemClick({ level: "subchildren", data: navItem });
+                setSwipeRight(true);
+                setTimeout(() => {
+                  setSwipeRight(false);
+                }, 300);
+              }}
               key={`category-${navItem.text}-${idx}`}
             >
               <NavItem navItem={navItem} type="children" />

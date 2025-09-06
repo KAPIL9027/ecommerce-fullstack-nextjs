@@ -56,9 +56,9 @@ export type HeaderPropsType = {
   topHeaderData: TopBarData;
   categoryHeaderData: MainHeaderData;
   saleData?: {
-    mainText: string;
-    linkText: string;
-    linkUrl: string;
+    title: string;
+    subtext: string;
+    redirectTo: string;
   };
 };
 
@@ -94,4 +94,10 @@ export type HamburgerMenuModalProps = {
 export type CurrentCategoryLevel = {
   level: string;
   data: SubCategoryType | CategoryNavItem | ChildSubcategory;
+};
+
+export type SaleBannerType = {
+  title: string;
+  subtext: string;
+  redirectTo: string;
 };

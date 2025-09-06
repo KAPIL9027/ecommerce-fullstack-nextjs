@@ -4,13 +4,13 @@ import React from "react";
 
 const TopBar = ({ logo, navItems }: TopBarData) => {
   return (
-    <div className="bg-[#F5F5F5] w-full justify-between items-center px-12 h-9 hidden large:flex">
+    <div className="bg-[#F5F5F5] w-full justify-between items-center px-10 h-9 hidden large:flex">
       <Link className="text-black" href={logo.redirectTo}>
-        <div className="w-8 h-8">
+        <div className="ml-2 w-6 h-6">
           <span>{logo.img}</span>
         </div>
       </Link>
-      <ul className="w-3xs flex gap-2 items-center text-black font-bold">
+      <ul className="w-3xs flex justify-between items-center text-black font-bold">
         {navItems.map((navItem: NavItem, idx: number) => {
           return (
             <div

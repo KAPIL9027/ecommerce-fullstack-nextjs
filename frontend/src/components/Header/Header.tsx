@@ -2,6 +2,7 @@ import { HeaderPropsType } from "@/types";
 import React from "react";
 import TopBar from "./TopBar";
 import MainHeader from "./MainHeader";
+import SaleBanner from "./SaleBanner";
 
 const Header = ({
   topHeaderData,
@@ -12,6 +13,7 @@ const Header = ({
     <div>
       <TopBar {...topHeaderData} />
       <MainHeader {...categoryHeaderData} />
+      {saleData && <SaleBanner {...saleData} />}
     </div>
   );
 };

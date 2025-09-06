@@ -337,9 +337,9 @@ const headerData: HeaderPropsType = {
     ],
   },
   saleData: {
-    mainText: "New Styles On Sale: Up To 40% Off",
-    linkText: "Shop All Our New Markdowns",
-    linkUrl: "/sale-3y3up",
+    title: "New Styles On Sale: Up To 40% Off",
+    subtext: "Shop All Our New Markdowns",
+    redirectTo: "/sale-3y3up",
   },
 };
 

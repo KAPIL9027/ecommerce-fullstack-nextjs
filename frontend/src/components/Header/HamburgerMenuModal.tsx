@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CloseIcon from "../icons/CloseIcon";
 import { CategoryNavItem, HamburgerMenuModalProps } from "@/types";
 import LeftArrow from "../icons/LeftArrow";
@@ -12,17 +12,22 @@ const HamburgerMenuModal = ({
   currentCategoryLevel,
   setCurrentCategoryLevel,
 }: HamburgerMenuModalProps) => {
-  let prevPage = "";
-  if (currentCategoryLevel.length > 0) {
-    if (
-      currentCategoryLevel[currentCategoryLevel.length - 1].level === "children"
-    ) {
-      prevPage = "All";
-    } else {
-      prevPage =
-        currentCategoryLevel[currentCategoryLevel.length - 1].data.text;
+  let getPrevPage = () => {
+    if (currentCategoryLevel.length > 0) {
+      if (
+        currentCategoryLevel[currentCategoryLevel.length - 1].level ===
+        "children"
+      ) {
+        return "All";
+      } else {
+        return currentCategoryLevel[currentCategoryLevel.length - 1].data.text;
+      }
     }
-  }
+    return "";
+  };
+  let prevPage = getPrevPage();
+  const [swipeLeft, setSwipeLeft] = useState(false);
+
   return (
     <div className="z-10 w-screen h-screen fixed top-0 left-0 bg-[#1111115C]">
       <div
@@ -30,37 +35,51 @@ const HamburgerMenuModal = ({
           animateCategoryMenu
             ? "opacity-100 translate-x-0"
             : "opacity-0 translate-x-100"
-        } w-[60vw] sm:w-[45vw] flex flex-col h-screen bg-white text-black px-4 py-6 overflow-scroll`}
+        } w-[75vw] sm:w-[45vw] flex flex-col h-screen bg-white text-black px-4 py-6 overflow-scroll`}
       >
-        <div className="w-full flex mb-4 cursor-pointer">
-          {currentCategoryLevel.length > 0 && (
+        <div
+          className={`transition-all duration-300 transform ${
+            swipeLeft
+              ? "opacity-0 -translate-x-100"
+              : "opacity-100 translate-x-0"
+          }`}
+        >
+          <div className={`w-full flex mb-4 cursor-pointer`}>
+            {currentCategoryLevel.length > 0 && (
+              <div
+                className="flex items-center gap-3"
+                onClick={() => {
+                  let updatedArray = [...currentCategoryLevel];
+                  if (updatedArray.length > 0) updatedArray.pop();
+                  setCurrentCategoryLevel(updatedArray);
+                  setTimeout(() => {
+                    setSwipeLeft(true);
+                    setTimeout(() => {
+                      setSwipeLeft(false);
+                    }, 300);
+                  }, 0);
+                }}
+              >
+                <div>
+                  <LeftArrow />
+                </div>
+                <p className="text-[16px] font-semibold">{prevPage}</p>
+              </div>
+            )}
             <div
-              className="flex items-center gap-3"
+              className="ml-auto cursor-pointer p-2 flex items-center justify-center rounded-3xl hover:bg-gray-200"
               onClick={() => {
-                let updatedArray = [...currentCategoryLevel];
-                if (updatedArray.length > 0) updatedArray.pop();
-                setCurrentCategoryLevel(updatedArray);
+                setAnimateCategoryMenu(false);
+                setTimeout(() => {
+                  setOpenHamburgerMenu(false);
+                }, 300);
               }}
             >
-              <div>
-                <LeftArrow />
-              </div>
-              <p className="text-[16px] font-semibold">{prevPage}</p>
+              <CloseIcon />
             </div>
-          )}
-          <div
-            className="ml-auto cursor-pointer p-2 flex items-center justify-center rounded-3xl hover:bg-gray-200"
-            onClick={() => {
-              setAnimateCategoryMenu(false);
-              setTimeout(() => {
-                setOpenHamburgerMenu(false);
-              }, 300);
-            }}
-          >
-            <CloseIcon />
           </div>
+          <div>{children}</div>
         </div>
-        <div>{children}</div>
       </div>
     </div>
   );
