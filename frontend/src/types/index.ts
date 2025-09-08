@@ -88,6 +88,9 @@ export type HamburgerMenuModalProps = {
   >;
   currentCategoryLevel: CurrentCategoryLevel[];
   animateCategoryMenu: boolean;
+  swipeLeft: boolean;
+  swipeRight: boolean;
+  setSwipeLeft: React.Dispatch<React.SetStateAction<boolean>>;
   children: ReactNode;
 };
 

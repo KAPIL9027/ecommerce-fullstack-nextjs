@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CloseIcon from "../icons/CloseIcon";
 import { CategoryNavItem, HamburgerMenuModalProps } from "@/types";
+import { slide } from "./MainHeader";
 import LeftArrow from "../icons/LeftArrow";
 
 const HamburgerMenuModal = ({
@@ -8,6 +9,9 @@ const HamburgerMenuModal = ({
   setOpenHamburgerMenu,
   setAnimateCategoryMenu,
   animateCategoryMenu,
+  swipeLeft,
+  swipeRight,
+  setSwipeLeft,
   children,
   currentCategoryLevel,
   setCurrentCategoryLevel,
@@ -26,7 +30,6 @@ const HamburgerMenuModal = ({
     return "";
   };
   let prevPage = getPrevPage();
-  const [swipeLeft, setSwipeLeft] = useState(false);
 
   return (
     <div className="z-10 w-screen h-screen fixed top-0 left-0 bg-[#1111115C]">
@@ -37,13 +40,7 @@ const HamburgerMenuModal = ({
             : "opacity-0 translate-x-100"
         } w-[75vw] sm:w-[45vw] flex flex-col h-screen bg-white text-black px-4 py-6 overflow-scroll`}
       >
-        <div
-          className={`transition-all duration-300 transform ${
-            swipeLeft
-              ? "opacity-0 -translate-x-100"
-              : "opacity-100 translate-x-0"
-          }`}
-        >
+        <div id="hamburger-content" className={"transform translate-x-0"}>
           <div className={`w-full flex mb-4 cursor-pointer`}>
             {currentCategoryLevel.length > 0 && (
               <div
@@ -52,12 +49,7 @@ const HamburgerMenuModal = ({
                   let updatedArray = [...currentCategoryLevel];
                   if (updatedArray.length > 0) updatedArray.pop();
                   setCurrentCategoryLevel(updatedArray);
-                  setTimeout(() => {
-                    setSwipeLeft(true);
-                    setTimeout(() => {
-                      setSwipeLeft(false);
-                    }, 300);
-                  }, 0);
+                  slide("left");
                 }}
               >
                 <div>

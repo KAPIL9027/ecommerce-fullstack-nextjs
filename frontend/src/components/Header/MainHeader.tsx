@@ -78,6 +78,16 @@ const shouldShowIcon = (icon: Logo, isMobile: boolean): boolean => {
       return true;
   }
 };
+export const slide = (position: string) => {
+  let hamburgerContent = document.getElementById("hamburger-content");
+  hamburgerContent!.style.transition = "";
+  hamburgerContent!.style.transform =
+    position === "left" ? "translateX(-105%)" : "translateX(105%)";
+  setTimeout(() => {
+    hamburgerContent!.style.transform = "";
+    hamburgerContent!.style.transition = "transform 200ms ease-in-out";
+  }, 200);
+};
 const haveChildren: (
   navItem: CategoryNavItem | SubCategoryType | ChildSubcategory
 ) => boolean = (
@@ -104,6 +114,8 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
   const [animateCategoryMenu, setAnimateCategoryMenu] =
     useState<boolean>(false);
   const [animateSubCategory, setAnimateSubCategory] = useState(true);
+  const [swipeLeft, setSwipeLeft] = useState<boolean>(false);
+  const [swipeRight, setSwipeRight] = useState<boolean>(false);
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState<boolean>(false);
 
   const openHamburger = () => {
@@ -135,10 +147,7 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
     let navItem = newCategoryLevel.data;
     if (!haveChildren(navItem)) return;
     setCurrentCategoryLevel([...currentCategoryLevel, newCategoryLevel]);
-    setAnimateSubCategory(false);
-    setTimeout(() => {
-      setAnimateSubCategory(true);
-    }, 300);
+    slide("right");
   };
   useEffect(() => {
     const handleResize = () => {
@@ -222,6 +231,9 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
             setAnimateCategoryMenu={setAnimateCategoryMenu}
             currentCategoryLevel={currentCategoryLevel}
             setCurrentCategoryLevel={setCurrentCategoryLevel}
+            swipeLeft={swipeLeft}
+            swipeRight={swipeRight}
+            setSwipeLeft={setSwipeLeft}
           >
             {currentCategoryLevel.length === 0 ? (
               <ParentCategoryView
@@ -424,7 +436,6 @@ const ChildCategoryView = ({
   } else if ("childSubcategories" in data) {
     items = data.childSubcategories;
   }
-  const [swipeRight, setSwipeRight] = useState<boolean>(false);
   return (
     <div className="px-2 flex flex-col gap-5 pt-8">
       <p className="text-2xl font-semibold text-[#111111]">{data.text}</p>
@@ -432,15 +443,8 @@ const ChildCategoryView = ({
         {items.map((navItem, idx) => {
           return (
             <div
-              className={`transition-all duration-300 transform ${
-                swipeRight ? "translate-x-100" : "translate-x-0"
-              }`}
               onClick={() => {
                 handleNavItemClick({ level: "subchildren", data: navItem });
-                setSwipeRight(true);
-                setTimeout(() => {
-                  setSwipeRight(false);
-                }, 300);
               }}
               key={`category-${navItem.text}-${idx}`}
             >
