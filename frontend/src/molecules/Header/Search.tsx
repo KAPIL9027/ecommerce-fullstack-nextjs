@@ -1,6 +1,6 @@
 "use client";
 import React, { ChangeEvent, InputEvent, useState } from "react";
-import SearchIcon from "../icons/SearchIcon";
+import SearchIcon from "../../components/icons/SearchIcon";
 import { SearchModalProps, SearchProps, SearchType } from "@/types";
 
 const Search = ({ type }: SearchProps) => {

@@ -15,14 +15,14 @@ import Search from "./Search";
 import SearchModal from "./SearchModal";
 import CategoryMenuModal from "./CategoryMenuModal";
 import HamburgerMenuModal from "./HamburgerMenuModal";
-import RightArrow from "../icons/RightArrow";
-import HeaderIcon from "../icons/HeaderIcon";
-import Button from "../atoms/Button";
-import HelpIcon from "../icons/HelpIcon";
-import CartIcon from "../icons/CartIcon";
-import OrdersIcon from "../icons/OrdersIcon";
-import StoreIcon from "../icons/StoreIcon";
-import HamburgerIcon from "../icons/HamburgerIcon";
+import RightArrow from "../../components/icons/RightArrow";
+import HeaderIcon from "../../components/icons/HeaderIcon";
+import Button from "../../components/atoms/Button";
+import HelpIcon from "../../components/icons/HelpIcon";
+import CartIcon from "../../components/icons/CartIcon";
+import OrdersIcon from "../../components/icons/OrdersIcon";
+import StoreIcon from "../../components/icons/StoreIcon";
+import HamburgerIcon from "../../components/icons/HamburgerIcon";
 
 const popularSearches = [
   "on court styles",

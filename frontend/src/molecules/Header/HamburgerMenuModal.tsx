@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CloseIcon from "../icons/CloseIcon";
+import CloseIcon from "../../components/icons/CloseIcon";
 import { CategoryNavItem, HamburgerMenuModalProps } from "@/types";
 import { slide } from "./MainHeader";
-import LeftArrow from "../icons/LeftArrow";
+import LeftArrow from "../../components/icons/LeftArrow";
 
 const HamburgerMenuModal = ({
   navItems,

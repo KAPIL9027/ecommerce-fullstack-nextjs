@@ -2,7 +2,7 @@
 import { CategoryMenuProps, CategoryNavItem } from "@/types";
 import Link from "next/link";
 import React from "react";
-import HamburgerIcon from "../icons/HamburgerIcon";
+import HamburgerIcon from "../../components/icons/HamburgerIcon";
 
 const CategoryMenu = ({
   navItems,
