@@ -104,3 +104,8 @@ export type SaleBannerType = {
   subtext: string;
   redirectTo: string;
 };
+
+export type MediaAsset = {
+  type: string;
+  src: string;
+};
