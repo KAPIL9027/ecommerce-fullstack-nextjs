@@ -149,14 +149,7 @@ const MainHeader = ({ mainLogo, navItems, icons }: MainHeaderData) => {
     setCurrentCategoryLevel([...currentCategoryLevel, newCategoryLevel]);
     slide("right");
   };
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  
 
   return (
     <div className="relative z-1 w-full h-16 flex justify-between items-center bg-white text-black text-sm font-medium pl-10 pr-9">

@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <div>
       <CardSwiper>
-        {heroBannerData.map((heroBanner) => {
-          return <HeroBanner {...heroBanner} />;
+        {heroBannerData.map((heroBanner, idx) => {
+          return <HeroBanner key={`herobanner-${idx}`} {...heroBanner} />;
         })}
       </CardSwiper>
     </div>

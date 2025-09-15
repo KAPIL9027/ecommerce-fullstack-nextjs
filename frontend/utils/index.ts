@@ -5,31 +5,7 @@ export const heroBannerData = [
     assets: [
       {
         type: "desktop",
-        src: "https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/w_1521,c_limit/8679cbfc-7722-47e0-bb44-3be88c1ad933/nike-just-do-it.jpg",
-      },
-      {
-        type: "mobile",
-        src: "https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/w_1521,c_limit/8679cbfc-7722-47e0-bb44-3be88c1ad933/nike-just-do-it.jpg",
-      },
-    ],
-    type: "image",
-    text: "<h3>CUT DIFFERENT</h3> <p>Anothere Grand Slam, same Carlos. Shop his top tennis picks and more now.</p>",
-    cta: [
-      {
-        text: "Shop Carlos's Pick",
-        redirectTo: "/alvaraz",
-      },
-      {
-        text: "Shop Tennis",
-        redirectTo: "/carlos",
-      },
-    ],
-  },
-  {
-    assets: [
-      {
-        type: "desktop",
-        src: "https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/w_1521,c_limit/8679cbfc-7722-47e0-bb44-3be88c1ad933/nike-just-do-it.jpg",
+        src: "https://static.nike.com/a/images/f_auto/dpr_2.0,cs_srgb/w_1024,c_limit/5d253be5-5e2b-47dd-89ba-31c7b2b92042/nike-just-do-it.jpg",
       },
       {
         type: "mobile",
@@ -66,30 +42,6 @@ export const heroBannerData = [
       {
         text: "Watch",
         redirectTo: "/watch",
-      },
-    ],
-  },
-  {
-    assets: [
-      {
-        type: "desktop",
-        src: "https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/w_1521,c_limit/8679cbfc-7722-47e0-bb44-3be88c1ad933/nike-just-do-it.jpg",
-      },
-      {
-        type: "mobile",
-        src: "https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/w_1521,c_limit/8679cbfc-7722-47e0-bb44-3be88c1ad933/nike-just-do-it.jpg",
-      },
-    ],
-    type: "image",
-    text: "<h3>CUT DIFFERENT</h3> <p>Anothere Grand Slam, same Carlos. Shop his top tennis picks and more now.</p>",
-    cta: [
-      {
-        text: "Shop Carlos's Pick",
-        redirectTo: "/alvaraz",
-      },
-      {
-        text: "Shop Tennis",
-        redirectTo: "/carlos",
       },
     ],
   },

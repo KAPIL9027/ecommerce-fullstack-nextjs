@@ -19,31 +19,37 @@ const HeroBanner = ({
   let desktopImgSrc = getResponsiveImg("desktop", assets);
 
   useEffect(() => {
-    let mainText = document.getElementById("main-text");
+    let mainText = document.getElementById(`main-text-${cta[0].text}`);
     mainText!.innerHTML = text;
+    let header = document.getElementsByTagName("h3");
+    let paragraph = document.getElementsByTagName("p");
+    header[0].style = "width: 100%; font-size: 60px; font-weight: 900;";
+    paragraph[0].style = "width: 100%; font-size: 32px; font-weight: 500";
   }, []);
   return (
     <div>
-      <div className="w-screen h-[60vh]">
+      <div className="w-screen">
         {type === "video" ? (
-          <video src={src} />
+          <video src={src} autoPlay={true} className="w-full object-cover" />
         ) : (
-          <img
-            className="w-full h-full"
-            srcSet={`${mobileImgSrc} 480w, ${desktopImgSrc} 800w`}
-            sizes="(max-width <= 600px) 480px, 800px"
-            src={`${desktopImgSrc}`}
-            alt="Hero Banner Image"
-          />
+          <picture>
+            <source media="(max-width: 800px)" srcSet={mobileImgSrc} />
+            <source media="(min-width: 801px)" srcSet={desktopImgSrc} />
+            <img
+              src={desktopImgSrc}
+              alt="Responsive Banner Image"
+              className="w-full"
+            />
+          </picture>
         )}
       </div>
-      <div className="flex flex-col gap-2 p-2">
-        <p id="main-text"></p>
+      <div className="flex flex-col gap-4 p-4 w-full justify-center items-center">
+        <div id={`main-text-${cta[0].text}`}></div>
         <div className="flex flex-row gap-1">
           {cta.map((link, index) => {
             return (
               <Link
-                className="flex flex-row "
+                className="bg-black text-white p-2 rounded-3xl"
                 key={`cta-${index}`}
                 href={link.redirectTo}
               >
